@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Đăng Nhập</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../assets/js/snackbar.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.nice-select.js"></script>
+	<link rel="stylesheet" href="../assets/font-awesome-4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../assets/css/jquery-confirm.min.css">
+	<link rel="stylesheet" href="../assets/css/snackbar.css">
+	<link rel="stylesheet" href="../assets/css/nice-select.css">
+	<!-- Fonts from Google-->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+
+	<script src="../assets/js/jquery-confirm.min.js"></script>
+	<style>
+
+		*{
+			-webkit-touch-callout: none; /* iOS Safari */
+		    -webkit-user-select: none; /* Safari */
+		     -khtml-user-select: none; /* Konqueror HTML */
+		       -moz-user-select: none; /* Firefox */
+		        -ms-user-select: none; /* Internet Explorer/Edge */
+		            user-select: none; /* Non-prefixed version, currently
+		                                  supported by Chrome and Opera */
+		}
+		body{
+			counter-reset: tableorder;
+			background-color: #FAFAFA;
+			font-family: Helvetica, sans-serif;
+		}
+		
+		input.form-control{
+			background-color: #F3F3F3;
+			border: none;
+			box-shadow: none;
+			height: 40px;
+			border: 1px dotted #758488;
+			border-radius: 5px;
+		}
+		select.form-control{
+			background-color: #F3F3F3;
+			border: none;
+			box-shadow: none;
+			height: 40px;
+			border: 1px dotted #758488;
+			border-radius: 5px;
+		}
+		input.form-control:focus{
+			box-shadow: none;
+			outline: none;
+		}
+		#button-quit{
+			cursor: pointer;
+			color: #ffffff;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			position: absolute;
+			right: 0px;
+			top: 0px;
+			height: 100%;
+			padding: 0px 20px;
+
+		}
+		#button-quit:hover{
+			background-color: #e74c3c;
+			color: #fff;
+		}
+		#button-minimize{
+			cursor: pointer;
+			color: #ffffff;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			position: absolute;
+			right: 50px;
+			top: 0px;
+			height: 100%;
+			padding: 0px 20px;
+		}
+		#button-minimize:hover{
+			background-color: #95a5a6;
+		}
+		#span-title-application{
+			color: #fff; margin-left: 10px; text-transform: capitalize; 
+			position: absolute;
+			right: 70px;
+			left: 20px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		#content-box{
+			width: 978px;
+			height: 560px;
+			position: relative;
+			box-sizing: border-box;
+		}
+		.sidebar-box{
+		  background-color: hsl(0, 0%, 95%);
+		  display: inline-block;
+		  position: absolute;
+		  height: 100%;
+		  width: 22%;
+		  left: 0px;
+		  transition: 0.5s;
+		  overflow-x: hidden;
+		  white-space: nowrap;
+		  text-overflow: ellipsis;
+		  border-right: 1px solid #dddfe2;
+		  
+		}
+		.sidebar-content{
+		  list-style-type: none;
+		  padding: 10px 0px;
+		}
+		.sidebar-content li{
+		  border-bottom: 1px solid #dddfe2;
+		}
+		.sidebar-content li:first-child{
+		  border-top: 1px solid #dddfe2;
+		}
+		.sidebar-content li a{
+		  color: #34495e;
+		  text-decoration: none;
+		  font-family: 'Roboto', sans-serif;
+		  display: block;
+		  font-weight: bold;
+		  padding: 15px 15px; 
+		}
+		.sidebar-content li a img{
+		 	width: 40px;
+		}
+		.sidebar-content li:hover{
+		  background-color: #2980b9;
+		  color: #fff;
+		}
+		.sidebar-content li:hover a{
+		  color: #fff;
+		}
+		.sidebar-content li.active{
+		  background-color: #2980b9;
+		  color: #fff;
+		}
+		.sidebar-content li.active a{
+		  color: #fff;
+		}
+		.content-main{
+			box-sizing: inherit;
+			position: absolute;
+			height: 100%;
+			width: 78%;
+			left: 22%;
+			padding: 10px 10px;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+		#user-avatar{
+			text-decoration: none;
+			padding: 8px 8px;
+			background-color: hsl(0, 0%, 95%);
+			color: #34495e;
+			font-weight: bold;
+			cursor: pointer;
+			text-overflow: ellipsis;
+			border-radius: 10px;
+		}
+		#user-avatar:hover, #user-avatar:focus{
+			background-color: hsl(0, 0%, 90%);
+		}
+		#user-dropdown-box{
+			width: 100%;  text-align: center;
+			margin-top: 10px;
+		}
+		.table-title::before{
+			counter-increment: tableorder;
+			content: "Bàn " counter(tableorder);
+		}
+		#span-app-name{
+			font-family: 'Bungee', cursive;
+		}
+	</style>
+</head>
+<body>
+		<div class="container-fluid"">
+			<div class="row" style="background-color: #2c3e50; padding: 10px; position: relative; " >
+				<span><i class="fa fa-bars" style="color: #ffffff;"></i></span>	
+				<span id="span-title-application"></span>
+				<button id="button-quit"><i class="fa fa-times"></i></button>	
+				<button id="button-minimize"><i class="fa fa-minus"></i></button>	
+				
+			</div>
+		</div>
+		<div id="content-box">
+			<div class="sidebar-box" id="test">
+			  <div id="user-dropdown-box" class="dropdown">
+			  	<span id="span-app-name"><img src="https://img.icons8.com/clouds/50/7f8c8d/coffee.png"> TÊN QUÁN</span><br>
+			  	<span style="font-family: 'Play', sans-serif; color: #34495e" >"Here is your Slogan"</span>
+			  	<br>
+			  </div>
+		      <ul class="sidebar-content">
+		        <li class="active">
+		          <a href="#" id="sidebar-danhsachban"><img src="../assets/img/shop.png"> Danh Sách Bàn</a>
+		        </li>
+		        <li>
+		          <a href="#" id="sidebar-danhmucdouong"><img src="../assets/img/menu.png""> Danh Mục Đồ Uống</a>
+		        </li>
+		        <li>
+		          <a href="#"><img src="https://img.icons8.com/color/40/7f8c8d/add-user-group-man-man.png"> Quản Lý Nhân Viên</a>
+		        </li>
+		        <li>
+		          <a href="#"><img src="https://img.icons8.com/cotton/40/7f8c8d/bill.png"> Quản Lý Hóa Đơn</a>
+		        </li>
+		        <li>
+		          <a href="#"><img src="https://img.icons8.com/doodle/40/7f8c8d/coffee-beans-.png"> Quản Lý Nguyên Liệu</a>
+		        </li>
+		        <li>
+		          <a href="#"><img src="https://img.icons8.com/dusk/40/7f8c8d/chart.png"> Thống Kê</a>
+		        </li>
+		      </ul>
+		    </div>
+		    <div class="content-main">
+		    	<div class="container-fluid">
+		    		<div class="row">
+		    			<div class="col-lg-12">
+		    				<div class="div-user pull-right">
+		    					<a id="user-avatar" class="dropdown-toggle" data-toggle="dropdown" ><img id="img-user-avatar" src="" alt=""> <span id="span-user-fullname"></span> <i style="color: #2ecc71" class="fa fa-circle"></i></a>
+								<ul class="dropdown-menu" style="position: absolute; right: 15px; top: 30px;">
+								    <li><a href="#" id="a-user-profile"><i class="fa fa-user"></i> Profile</a></li>
+								    <li><a href="#"><i class="fa fa-lock"></i> Đổi Mật Khẩu</a></li>
+								    <li class="divider"></li>
+								    <li><a href="#" id="a-user-logout"><i class="fa fa-power-off"></i> Đăng Xuất</a></li>
+								 </ul>
+		    				</div>
+		    			</div>
+		    		</div>
+		    		<section id="section-content">
+		    		</section>
+		    	</div>
+		    </div>
+		</div>
+		<script type="text/javascript">
+		</script>
+</body>
+</html>
